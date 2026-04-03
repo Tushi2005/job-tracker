@@ -19,3 +19,7 @@ table {
 ::ng-deep .mat-sort-header-arrow {
   opacity: 1 !important;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}

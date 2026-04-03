@@ -1,7 +1,11 @@
 <div class="list-container">
   <div class="header">
-    <h2>Jelentkezéseim</h2>
-    <button mat-raised-button color="primary" routerLink="/applications/new">+ Új jelentkezés</button>
+    <h2> Jelentkezéseim</h2>
+    <mat-toolbar color="primary">
+      <span class="spacer"></span>
+      <button mat-button color="accent" routerLink="/applications/new">+ Új jelentkezés</button>
+      <button mat-button routerLink="/login">Kijelentkezés</button>
+    </mat-toolbar>
   </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" 

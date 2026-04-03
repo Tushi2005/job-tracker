@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { STATUS_OPTIONS } from '../../../core/models/applications.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationDetailDialog } from '../application-detail-dialog/application-detail-dialog';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-applications-list',
@@ -24,7 +25,8 @@ import { ApplicationDetailDialog } from '../application-detail-dialog/applicatio
     MatIconModule,
     MatSortModule,
     MatSelect,
-    MatOption
+    MatOption,
+    MatToolbar
   ],
   templateUrl: './applications-list.html',
   styleUrls: ['./applications-list.css']
