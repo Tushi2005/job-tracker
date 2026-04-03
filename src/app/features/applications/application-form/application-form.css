@@ -20,11 +20,29 @@ mat-card {
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.date-row mat-form-field {
-  flex: 1;
+.date-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;  
 }
 .button-row {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.date-row mat-form-field {
+  flex: 1;
+  min-width: 150px; 
+}
+
+mat-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 1rem;
+  box-sizing: border-box;
+}
+.form-container {
+  padding: 1rem; /* kisebb padding mobilon */
 }

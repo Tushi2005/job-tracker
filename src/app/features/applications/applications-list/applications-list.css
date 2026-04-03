@@ -23,3 +23,12 @@ table {
 .spacer {
   flex: 1 1 auto;
 }
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  min-width: 600px; /* vagy a tényleges szélesség, hogy ne törje össze a tartalmat */
+  width: 100%;
+}
