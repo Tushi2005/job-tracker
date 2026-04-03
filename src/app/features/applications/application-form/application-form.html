@@ -1,0 +1,67 @@
+<div class="form-container">
+  <mat-card>
+    <mat-card-title>{{ pageTitle }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Cégnév -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Cégnév</mat-label>
+          <input matInput formControlName="companyName">
+          <mat-error *ngIf="form.get('companyName')?.hasError('required')">Kötelező</mat-error>
+        </mat-form-field>
+
+        <!-- Pozíció -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Pozíció</mat-label>
+          <input matInput formControlName="position">
+          <mat-error *ngIf="form.get('position')?.hasError('required')">Kötelező</mat-error>
+        </mat-form-field>
+
+        <!-- Státusz -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Státusz</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let opt of statusOptions" [value]="opt">{{ opt }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Dátumok -->
+        <div class="date-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Jelentkezés dátuma</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="appliedAt">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Interjú dátuma (opcionális)</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="interviewAt">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <!-- URL -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Álláshirdetés URL</mat-label>
+          <input matInput formControlName="jobUrl">
+          <mat-error *ngIf="form.get('jobUrl')?.hasError('pattern')">Nem érvényes URL (kezdődjön http:// vagy https://)</mat-error>
+        </mat-form-field>
+
+        <!-- Megjegyzések -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Megjegyzések</mat-label>
+          <textarea matInput formControlName="notes" rows="3"></textarea>
+        </mat-form-field>
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            {{ isEditMode ? 'Mentés' : 'Létrehozás' }}
+          </button>
+          <button mat-button type="button" routerLink="/applications">Mégse</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

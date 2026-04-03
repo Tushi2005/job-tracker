@@ -3,7 +3,7 @@ export interface Application{
     userId: number;
     companyName: string;
     position: string;
-    status: string;
+    status: ApplicationStatus;
     appliedAt: Date;
     interviewAt?: Date;
     jobUrl?: string;
@@ -12,11 +12,11 @@ export interface Application{
     updatedAt: string;
 }
 
-enum applicationStatus{
-  Sent = 0,
-  InterviewScheduled = 1,
-  SecondRound = 2,
-  Accepted = 3,
-  Rejected = 4,
-  NoResponse = 5
+export enum ApplicationStatus {
+  Sent = 'Sent',
+  InterviewScheduled = 'InterviewScheduled',
+  SecondRound = 'SecondRound',
+  Accepted = 'Accepted',
+  Rejected = 'Rejected',
+  NoResponse = 'NoResponse'
 }
