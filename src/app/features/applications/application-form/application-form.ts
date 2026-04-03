@@ -10,7 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplicationService } from '../../../core/services/application.service';
-import { ApplicationStatus } from '../../../core/models/applications.model';
+import { ApplicationStatus, STATUS_OPTIONS } from '../../../core/models/applications.model';
 
 @Component({
   selector: 'app-application-form',
@@ -36,8 +36,7 @@ export class ApplicationForm implements OnInit {
   applicationId?: number;
   pageTitle = 'Új jelentkezés';
 
-  // Az enum összes értékének listája a dropdownhoz
-  statusOptions = Object.values(ApplicationStatus);
+  statusOptions = STATUS_OPTIONS;
 
   constructor(
     private applicationService: ApplicationService,
@@ -71,7 +70,6 @@ export class ApplicationForm implements OnInit {
   private loadApplication(id: number): void {
     this.applicationService.getById(id).subscribe({
       next: (app) => {
-        // A backendről jövő status már string, ami megegyezik az enum értékeivel
         this.form.patchValue({
           companyName: app.companyName,
           position: app.position,

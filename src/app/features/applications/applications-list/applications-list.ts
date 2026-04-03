@@ -1,11 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,  ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSelect, MatOption } from '@angular/material/select';
 import { ApplicationService } from '../../../core/services/application.service';
 import { Application, ApplicationStatus } from '../../../core/models/applications.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { STATUS_OPTIONS } from '../../../core/models/applications.model';
 
 @Component({
   selector: 'app-applications-list',
@@ -15,28 +19,39 @@ import { Application, ApplicationStatus } from '../../../core/models/application
     RouterLink,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSortModule,
+    MatSelect,
+    MatOption
   ],
   templateUrl: './applications-list.html',
   styleUrls: ['./applications-list.css']
 })
-export class ApplicationsList implements OnInit {
+export class ApplicationsList implements OnInit, AfterViewInit {
   applications: Application[] = [];
   displayedColumns: string[] = ['companyName', 'position', 'status', 'appliedAt', 'actions'];
+  dataSource = new MatTableDataSource<Application>(this.applications);
+  statusOptions = STATUS_OPTIONS;
+  
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private applicationService: ApplicationService,
-    private cdr:ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.loadApplications();
   }
 
+  ngAfterViewInit(): void{
+    this.dataSource.sort = this.sort;
+  }
+
   loadApplications(): void {
     this.applicationService.getAll().subscribe({
       next: (data) => {
         this.applications = data;
-        this.cdr.detectChanges();
+        this.dataSource.data = this.applications;
       },
       error: (err) => console.error('Hiba a betöltéskor', err)
     });
@@ -51,8 +66,21 @@ export class ApplicationsList implements OnInit {
     }
   }
 
-  // A státusz szöveges megjelenítéséhez (ha kell)
   getStatusLabel(status: ApplicationStatus): string {
     return status;
+  }
+
+  patchStatus(id: number, newStatus: ApplicationStatus): void {
+    const app = this.applications.find(a => a.id === id);
+    if (!app) return;
+
+    const payload = { status: newStatus };
+    this.applicationService.patch(id, payload).subscribe({
+      next: () => {
+        app.status = newStatus;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err)
+    });
   }
 }

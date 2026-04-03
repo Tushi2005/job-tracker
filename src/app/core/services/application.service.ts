@@ -27,4 +27,8 @@ export class ApplicationService{
     delete(id: number){
         return this.http.delete<Application>(`${this.apiUrl}/${id}`);
     }
+
+    patch(id: number, data: Partial<Application>) {
+        return this.http.patch<Application>(`${this.apiUrl}/${id}`, data);
+    }
 }

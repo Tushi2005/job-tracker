@@ -20,3 +20,13 @@ export enum ApplicationStatus {
   Rejected = 'Rejected',
   NoResponse = 'NoResponse'
 }
+
+
+export const STATUS_OPTIONS = [
+  { value: ApplicationStatus.Sent, label: 'Elküldve' },
+  { value: ApplicationStatus.InterviewScheduled, label: 'Interjú' },
+  { value: ApplicationStatus.SecondRound, label: 'Második kör' },
+  { value: ApplicationStatus.Accepted, label: 'Elfogadott' },
+  { value: ApplicationStatus.Rejected, label: 'Elutasított' },
+  { value: ApplicationStatus.NoResponse, label: 'Nincs válasz' }
+];
