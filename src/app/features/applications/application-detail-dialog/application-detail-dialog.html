@@ -1,0 +1,77 @@
+<h2 mat-dialog-title>
+    <mat-icon>work</mat-icon>
+    Jelentkezés részletei
+</h2>
+
+<mat-dialog-content>
+    <div class="detail-grid">
+
+        <div class="detail-item">
+            <mat-icon>business</mat-icon>
+            <div>
+                <span class="label">Cégnév</span>
+                <span class="value">{{ data.companyName }}</span>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <mat-icon>badge</mat-icon>
+            <div>
+                <span class="label">Pozíció</span>
+                <span class="value">{{ data.position }}</span>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <mat-icon>flag</mat-icon>
+            <div>
+                <span class="label">Státusz</span>
+                <span class="value status-chip" [ngClass]="'status-' + data.status">
+                    {{ data.status }}
+                </span>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <mat-icon>calendar_today</mat-icon>
+            <div>
+                <span class="label">Jelentkezés dátuma</span>
+                <span class="value">{{ data.appliedAt | date:'yyyy. MM. dd.' }}</span>
+            </div>
+        </div>
+
+        <div class="detail-item" *ngIf="data.interviewAt">
+            <mat-icon>event</mat-icon>
+            <div>
+                <span class="label">Interjú dátuma</span>
+                <span class="value">{{ data.interviewAt | date:'yyyy. MM. dd.' }}</span>
+            </div>
+        </div>
+
+        <div class="detail-item" *ngIf="data.jobUrl">
+            <mat-icon>link</mat-icon>
+            <div>
+                <span class="label">Álláshirdetés</span>
+                <a class="value link" [href]="data.jobUrl" target="_blank">{{ data.jobUrl }}</a>
+            </div>
+        </div>
+
+        <div class="detail-item" *ngIf="data.notes">
+            <mat-icon>notes</mat-icon>
+            <div>
+                <span class="label">Megjegyzések</span>
+                <span class="value">{{ data.notes }}</span>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>
+
+<mat-divider></mat-divider>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">
+        <mat-icon>close</mat-icon>
+        Bezárás
+    </button>
+</mat-dialog-actions>

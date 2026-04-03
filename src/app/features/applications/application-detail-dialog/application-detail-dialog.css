@@ -1,0 +1,77 @@
+h2[mat-dialog-title] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.3rem;
+  color: #1E3A5F;
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  padding-top: 16px !important;
+}
+
+.detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detail-item mat-icon {
+  color: #2563EB;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.detail-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.value {
+  font-size: 1rem;
+  color: #111827;
+}
+
+.link {
+  color: #2563EB;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-0 { background: #DBEAFE; color: #1D4ED8; } /* Sent */
+.status-1 { background: #FEF3C7; color: #D97706; } /* InterviewScheduled */
+.status-2 { background: #EDE9FE; color: #7C3AED; } /* SecondRound */
+.status-3 { background: #D1FAE5; color: #065F46; } /* Accepted */
+.status-4 { background: #FEE2E2; color: #991B1B; } /* Rejected */
+.status-5 { background: #F3F4F6; color: #6B7280; } /* NoResponse */
+
+mat-dialog-actions {
+  padding: 8px 16px !important;
+}
