@@ -40,6 +40,9 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Műveletek </th>
       <td mat-cell *matCellDef="let app">
+        <button mat-icon-button color="primary" (click)="openDetailDialog(app)">
+          <mat-icon>info</mat-icon>
+        </button>
         <button mat-icon-button color="primary" [routerLink]="['/applications', app.id, 'edit']">
           <mat-icon>edit</mat-icon>
         </button>

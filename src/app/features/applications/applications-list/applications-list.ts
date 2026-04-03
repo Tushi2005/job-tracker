@@ -10,6 +10,8 @@ import { ApplicationService } from '../../../core/services/application.service';
 import { Application, ApplicationStatus } from '../../../core/models/applications.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { STATUS_OPTIONS } from '../../../core/models/applications.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ApplicationDetailDialog } from '../application-detail-dialog/application-detail-dialog';
 
 @Component({
   selector: 'app-applications-list',
@@ -36,7 +38,8 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private applicationService: ApplicationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -83,4 +86,10 @@ export class ApplicationsList implements OnInit, AfterViewInit {
       error: (err) => console.error(err)
     });
   }
+
+  openDetailDialog(application: Application): void {
+  this.dialog.open(ApplicationDetailDialog, {
+    data: application
+  });
+}
 }
