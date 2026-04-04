@@ -1,4 +1,4 @@
-import { Component, OnInit,  ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -36,19 +36,19 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['companyName', 'position', 'status', 'appliedAt', 'actions'];
   dataSource = new MatTableDataSource<Application>(this.applications);
   statusOptions = STATUS_OPTIONS;
-  
+
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private applicationService: ApplicationService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadApplications();
   }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
@@ -90,8 +90,12 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   }
 
   openDetailDialog(application: Application): void {
-  this.dialog.open(ApplicationDetailDialog, {
-    data: application
-  });
-}
+    const isMobile = window.innerWidth < 600;
+    this.dialog.open(ApplicationDetailDialog, {
+      data: application,
+      width: isMobile ? '95vw' : '500px',
+      maxWidth: isMobile ? '95vw' : '90vw',
+      maxHeight: '90vh',
+    });
+  }
 }

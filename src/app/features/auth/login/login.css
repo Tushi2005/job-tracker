@@ -18,6 +18,25 @@
 }
 
 mat-card {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .login-container,
+  .register-container {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  mat-card {
+    padding: 16px;
+  }
+
+  mat-card-title {
+    font-size: 1.2rem;
+  }
 }

@@ -29,6 +29,36 @@ table {
   -webkit-overflow-scrolling: touch;
 }
 table {
-  min-width: 600px; /* vagy a tényleges szélesség, hogy ne törje össze a tartalmat */
+  min-width: 600px; 
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  mat-toolbar {
+    width: 100%;
+    flex-wrap: wrap;
+    height: auto !important;
+    padding: 8px;
+  }
+
+  .list-container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-container {
+    padding: 0.5rem;
+  }
 }
