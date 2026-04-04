@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Application } from '../models/applications.model';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({providedIn:'root'})
 export class ApplicationService{
-    private apiUrl = 'https://localhost:7194/api/applications';
+    private apiUrl = 'http://192.168.1.108:8080/api/applications';
 
     constructor(private http:HttpClient) {}
 

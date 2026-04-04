@@ -1,11 +1,12 @@
 import { signal, Injectable } from "@angular/core";
 import { HttpClient, HttpBackend } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environment.prod";
 
 
 @Injectable({providedIn:"root"})
 export class AuthService{
-    private apiUrl = 'https://localhost:7194/api/auth';
+    private apiUrl = 'http://192.168.1.108:8080/api/auth';
     private http: HttpClient;
     currentUser = signal<string| null>(null);
 
@@ -13,6 +14,8 @@ export class AuthService{
         this.http = new HttpClient(handler);
         const token = localStorage.getItem('token');
         if(token) this.currentUser.set(localStorage.getItem('fullName'))
+        console.log('Environment:', environment);
+console.log('API URL:', environment.apiUrl);
     }
 
     register(data: {email:string, password: string, fullName: string}){
