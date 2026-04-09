@@ -14,8 +14,6 @@ export class AuthService{
         this.http = new HttpClient(handler);
         const token = localStorage.getItem('token');
         if(token) this.currentUser.set(localStorage.getItem('fullName'))
-        console.log('Environment:', environment);
-console.log('API URL:', environment.apiUrl);
     }
 
     register(data: {email:string, password: string, fullName: string}){
