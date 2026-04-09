@@ -1,4 +1,4 @@
-import { Component, OnInit,  ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -13,6 +13,7 @@ import { STATUS_OPTIONS } from '../../../core/models/applications.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationDetailDialog } from '../application-detail-dialog/application-detail-dialog';
 import { MatToolbar } from '@angular/material/toolbar';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-applications-list',
@@ -36,19 +37,20 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['companyName', 'position', 'status', 'appliedAt', 'actions'];
   dataSource = new MatTableDataSource<Application>(this.applications);
   statusOptions = STATUS_OPTIONS;
-  
+
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private applicationService: ApplicationService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.loadApplications();
   }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
@@ -90,8 +92,12 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   }
 
   openDetailDialog(application: Application): void {
-  this.dialog.open(ApplicationDetailDialog, {
-    data: application
-  });
-}
+    this.dialog.open(ApplicationDetailDialog, {
+      data: application
+    });
+  }
+
+  logOut(): void{
+    this.authService.logout();
+  }
 }
