@@ -4,7 +4,7 @@
     <mat-toolbar color="primary">
       <span class="spacer"></span>
       <button mat-button color="accent" routerLink="/applications/new">+ Új jelentkezés</button>
-      <button mat-button routerLink="/login">Kijelentkezés</button>
+      <button mat-button routerLink="/login" (click)="logOut()">Kijelentkezés</button>
     </mat-toolbar>
   </div>
 
