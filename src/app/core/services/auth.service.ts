@@ -6,7 +6,7 @@ import { environment } from "../../../environments/environment.prod";
 
 @Injectable({providedIn:"root"})
 export class AuthService{
-    private apiUrl = 'http://192.168.1.108:8080/api/auth';
+    private apiUrl = `${environment.apiUrl}/api/auth`;
     private http: HttpClient;
     currentUser = signal<string| null>(null);
 
