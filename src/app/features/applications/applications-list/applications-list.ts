@@ -100,4 +100,8 @@ export class ApplicationsList implements OnInit, AfterViewInit {
       maxHeight: '90vh',
     });
   }
+
+  logOut(): void{
+    this.authService.logout();
+  }
 }
