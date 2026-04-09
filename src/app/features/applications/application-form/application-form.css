@@ -46,3 +46,33 @@ mat-card {
 .form-container {
   padding: 1rem; /* kisebb padding mobilon */
 }
+
+@media (max-width: 600px) {
+  .form-container {
+    padding: 0.5rem;
+    align-items: flex-start;
+  }
+
+  mat-card {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .date-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .date-row mat-form-field {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .button-row button {
+    width: 100%;
+  }
+}

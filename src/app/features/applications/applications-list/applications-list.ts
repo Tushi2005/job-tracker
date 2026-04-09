@@ -51,21 +51,21 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-  }
+      this.dataSource.sort = this.sort;
+    }
 
-  loadApplications(): void {
-    this.applicationService.getAll().subscribe({
-      next: (data) => {
-        this.applications = data;
-        this.dataSource.data = this.applications;
-      },
-      error: (err) => console.error('Hiba a betöltéskor', err)
-    });
-  }
+    loadApplications(): void {
+      this.applicationService.getAll().subscribe({
+        next: (data) => {
+          this.applications = data;
+          this.dataSource.data = this.applications;
+        },
+        error: (err) => console.error('Hiba a betöltéskor', err)
+      });
+    }
 
-  deleteApplication(id: number): void {
-    if (confirm('Biztosan törölni szeretnéd?')) {
+    deleteApplication(id: number): void {
+      if(confirm('Biztosan törölni szeretnéd?')) {
       this.applicationService.delete(id).subscribe({
         next: () => this.loadApplications(),
         error: (err) => console.error('Törlési hiba', err)
@@ -92,8 +92,12 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   }
 
   openDetailDialog(application: Application): void {
+    const isMobile = window.innerWidth < 600;
     this.dialog.open(ApplicationDetailDialog, {
-      data: application
+      data: application,
+      width: isMobile ? '95vw' : '500px',
+      maxWidth: isMobile ? '95vw' : '90vw',
+      maxHeight: '90vh',
     });
   }
 

@@ -84,3 +84,26 @@ mat-dialog-actions {
     display: inline-block;
   }
 }
+
+@media (max-width: 600px) {
+  mat-dialog-content {
+    min-width: unset;
+    width: 100%;
+  }
+
+  h2[mat-dialog-title] {
+    font-size: 1.1rem;
+  }
+
+  .detail-item {
+    gap: 8px;
+  }
+
+  .label {
+    font-size: 0.7rem;
+  }
+
+  .value {
+    font-size: 0.9rem;
+  }
+}
