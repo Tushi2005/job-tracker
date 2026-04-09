@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment.prod';
 
 @Injectable({providedIn:'root'})
 export class ApplicationService{
-    private apiUrl = 'http://192.168.1.108:8080/api/applications';
+    private apiUrl = `${environment.apiUrl}/api/applications`;
 
     constructor(private http:HttpClient) {}
 
