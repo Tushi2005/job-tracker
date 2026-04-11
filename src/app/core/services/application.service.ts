@@ -13,6 +13,14 @@ export class ApplicationService{
         return this.http.get<Application[]>(this.apiUrl);
     }
 
+    getCompanies(){
+        return this.http.get<string[]>(`${this.apiUrl}/companies`)
+    }
+
+    getPositions(){
+        return this.http.get<string[]>(`${this.apiUrl}/positions`)
+    }
+
     getById(id: number){
         return this.http.get<Application>(`${this.apiUrl}/${id}`);
     }

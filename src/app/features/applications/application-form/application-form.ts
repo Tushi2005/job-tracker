@@ -9,8 +9,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { ApplicationService } from '../../../core/services/application.service';
 import { ApplicationStatus, STATUS_OPTIONS } from '../../../core/models/applications.model';
+import { Observable, startWith, map } from 'rxjs';
+import { AutocompleteFilterService } from '../../../core/services/autocomplete.service';
 
 @Component({
   selector: 'app-application-form',
@@ -25,7 +28,9 @@ import { ApplicationStatus, STATUS_OPTIONS } from '../../../core/models/applicat
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocomplete,
+    MatAutocompleteTrigger
   ],
   templateUrl: './application-form.html',
   styleUrls: ['./application-form.css']
@@ -38,14 +43,29 @@ export class ApplicationForm implements OnInit {
 
   statusOptions = STATUS_OPTIONS;
 
+  filteredCompanies!: Observable<string[]>
+  filteredPositions!: Observable<string[]>;
+
   constructor(
     private applicationService: ApplicationService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private autocompleteFilter: AutocompleteFilterService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
+    
+    this.filteredCompanies = this.autocompleteFilter.createFilter(
+      this.form.get('companyName')!,
+      this.applicationService.getCompanies()
+    );
+
+    this.filteredPositions = this.autocompleteFilter.createFilter(
+      this.form.get('position')!,
+      this.applicationService.getPositions()
+    )
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEditMode = true;
@@ -96,7 +116,7 @@ export class ApplicationForm implements OnInit {
       status: data.status,           // itt az enum értéke (pl. "Sent")
       appliedAt: data.appliedAt.toISOString(),
       interviewAt: data.interviewAt ? data.interviewAt.toISOString() : null,
-      jobUrl: jobUrlValue, 
+      jobUrl: jobUrlValue,
       notes: data.notes
     };
 
@@ -111,5 +131,7 @@ export class ApplicationForm implements OnInit {
         error: (err) => console.error('Hiba a mentéskor', err)
       });
     }
+
+
   }
 }
