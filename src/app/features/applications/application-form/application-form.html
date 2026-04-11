@@ -6,14 +6,32 @@
         <!-- Cégnév -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Cégnév</mat-label>
-          <input matInput formControlName="companyName">
+          <input type="text"
+          matInput
+          formControlName="companyName"
+          [matAutocomplete]="autoCompany">
+          
+          <mat-autocomplete #autoCompany="matAutocomplete">
+            @for (company of filteredCompanies | async; track company) {
+            <mat-option [value]="company">{{company}}</mat-option>
+            }
+          </mat-autocomplete>
           <mat-error *ngIf="form.get('companyName')?.hasError('required')">Kötelező</mat-error>
         </mat-form-field>
 
         <!-- Pozíció -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Pozíció</mat-label>
-          <input matInput formControlName="position">
+          <input type="text"
+          matInput
+          [matAutocomplete]="autoPosition"
+          formControlName="position">
+
+          <mat-autocomplete #autoPosition="matAutocomplete">
+            @for (position of filteredPositions | async; track position) {
+            <mat-option [value]="position">{{position}}</mat-option>
+            }
+          </mat-autocomplete>
           <mat-error *ngIf="form.get('position')?.hasError('required')">Kötelező</mat-error>
         </mat-form-field>
 
@@ -46,7 +64,8 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Álláshirdetés URL</mat-label>
           <input matInput formControlName="jobUrl">
-          <mat-error *ngIf="form.get('jobUrl')?.hasError('pattern')">Nem érvényes URL (kezdődjön http:// vagy https://)</mat-error>
+          <mat-error *ngIf="form.get('jobUrl')?.hasError('pattern')">Nem érvényes URL (kezdődjön http:// vagy
+            https://)</mat-error>
         </mat-form-field>
 
         <!-- Megjegyzések -->
