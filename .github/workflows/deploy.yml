@@ -1,0 +1,16 @@
+name: Auto Deploy to Portainer
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    
+    runs-on: self-hosted 
+
+    steps:
+      - name: Trigger Portainer Webhook
+        run: |
+          curl -k -X POST "https://192.168.1.108:31015/api/stacks/webhooks/b8c71b71-2a63-444c-afbc-a28ead578acc"
