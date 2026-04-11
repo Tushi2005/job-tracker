@@ -42,15 +42,9 @@ export class ApplicationForm implements OnInit {
   pageTitle = 'Új jelentkezés';
 
   statusOptions = STATUS_OPTIONS;
-  // TODO get company names from backend
-  // dummy data
-  companyNames: string[] = ['Apple', 'Microsoft', 'Google', 'Amazon', 'Facebook', 'Alza'];
-  positions: string[] = ['Frontend fejlesztő', 'Backend fejlesztő', 'Fullstack fejlesztő', 'DevOps mérnök', 'UI/UX designer', 'Projektmenedzser'];
 
   filteredCompanies!: Observable<string[]>
   filteredPositions!: Observable<string[]>;
-
-  
 
   constructor(
     private applicationService: ApplicationService,
@@ -61,14 +55,15 @@ export class ApplicationForm implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    
     this.filteredCompanies = this.autocompleteFilter.createFilter(
       this.form.get('companyName')!,
-      this.companyNames
+      this.applicationService.getCompanies()
     );
 
     this.filteredPositions = this.autocompleteFilter.createFilter(
       this.form.get('position')!,
-      this.positions
+      this.applicationService.getPositions()
     )
 
     const id = this.route.snapshot.paramMap.get('id');
