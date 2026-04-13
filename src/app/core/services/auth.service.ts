@@ -1,7 +1,7 @@
 import { signal, Injectable } from "@angular/core";
 import { HttpClient, HttpBackend } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { environment } from "../../../environments/environment.prod";
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({providedIn:"root"})
