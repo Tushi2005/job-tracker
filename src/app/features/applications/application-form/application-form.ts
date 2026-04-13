@@ -14,6 +14,7 @@ import { ApplicationService } from '../../../core/services/application.service';
 import { ApplicationStatus, STATUS_OPTIONS } from '../../../core/models/applications.model';
 import { Observable, startWith, map } from 'rxjs';
 import { AutocompleteFilterService } from '../../../core/services/autocomplete.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-application-form',
@@ -50,7 +51,8 @@ export class ApplicationForm implements OnInit {
     private applicationService: ApplicationService,
     private route: ActivatedRoute,
     private router: Router,
-    private autocompleteFilter: AutocompleteFilterService
+    private autocompleteFilter: AutocompleteFilterService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -100,7 +102,10 @@ export class ApplicationForm implements OnInit {
           notes: app.notes
         });
       },
-      error: (err) => console.error('Hiba a betöltéskor', err)
+      error: () => {
+          this.snackBar.open('Hiba betöltéskor.', 'Bezár', {
+          });
+        }
     });
   }
 
@@ -123,12 +128,18 @@ export class ApplicationForm implements OnInit {
     if (this.isEditMode && this.applicationId) {
       this.applicationService.update(this.applicationId, payload).subscribe({
         next: () => this.router.navigate(['/applications']),
-        error: (err) => console.error('Hiba a frissítéskor', err)
+        error: () => {
+          this.snackBar.open('Hiba frissitéskor', 'Bezár', {
+          });
+        }
       });
     } else {
       this.applicationService.create(payload).subscribe({
         next: () => this.router.navigate(['/applications']),
-        error: (err) => console.error('Hiba a mentéskor', err)
+        error: () => {
+          this.snackBar.open('Hiba mentéskor', 'Bezár', {
+          });
+        }
       });
     }
 

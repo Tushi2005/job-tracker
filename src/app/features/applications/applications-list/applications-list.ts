@@ -14,6 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApplicationDetailDialog } from '../application-detail-dialog/application-detail-dialog';
 import { MatToolbar } from '@angular/material/toolbar';
 import { AuthService } from '../../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialog} from '../../../shared/confirm-dialog/confirm-dialog';
+
 
 @Component({
   selector: 'app-applications-list',
@@ -43,7 +46,8 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   constructor(private applicationService: ApplicationService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -51,27 +55,37 @@ export class ApplicationsList implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      this.dataSource.sort = this.sort;
-    }
+    this.dataSource.sort = this.sort;
+  }
 
-    loadApplications(): void {
-      this.applicationService.getAll().subscribe({
-        next: (data) => {
-          this.applications = data;
-          this.dataSource.data = this.applications;
-        },
-        error: (err) => console.error('Hiba a betöltéskor', err)
-      });
-    }
+  loadApplications(): void {
+    this.applicationService.getAll().subscribe({
+      next: (data) => {
+        this.applications = data;
+        this.dataSource.data = this.applications;
+      },
+      error: () => {
+        this.snackBar.open('Nem sikerült betölteni a jelentkezéseket.', 'Bezár', {
+          duration: 4000
+        });
+      }
+    });
+  }
 
-    deleteApplication(id: number): void {
-      if(confirm('Biztosan törölni szeretnéd?')) {
+deleteApplication(id: number): void {
+  const dialogRef = this.dialog.open(ConfirmDialog, {
+    data: { message: 'Biztosan törölni szeretnéd ezt a jelentkezést?' }
+  });
+
+  dialogRef.afterClosed().subscribe(confirmed => {
+    if (confirmed) {
       this.applicationService.delete(id).subscribe({
         next: () => this.loadApplications(),
-        error: (err) => console.error('Törlési hiba', err)
+        error: () => this.snackBar.open('Törlés sikertelen.', 'Bezár', { duration: 3000 })
       });
     }
-  }
+  });
+}
 
   getStatusLabel(status: ApplicationStatus): string {
     return status;
@@ -87,7 +101,6 @@ export class ApplicationsList implements OnInit, AfterViewInit {
         app.status = newStatus;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error(err)
     });
   }
 
@@ -101,7 +114,7 @@ export class ApplicationsList implements OnInit, AfterViewInit {
     });
   }
 
-  logOut(): void{
+  logOut(): void {
     this.authService.logout();
   }
 }
