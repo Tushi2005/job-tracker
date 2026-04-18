@@ -4,7 +4,7 @@ Angular 21 alapú SPA (Single Page Application) állásjelentkezések nyomon kö
 
 ## Technológiai stack
 
-- **Angular 19** – standalone components
+- **Angular 21** – standalone components
 - **TypeScript**
 - **Angular Material** – UI komponens könyvtár
 - **RxJS** – reaktív adatfolyamok
