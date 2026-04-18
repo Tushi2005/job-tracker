@@ -1,6 +1,6 @@
 # JobTracker – Frontend
 
-Angular 19 alapú SPA (Single Page Application) állásjelentkezések nyomon követéséhez. Angular Material UI, JWT alapú hitelesítés, reszponzív design.
+Angular 21 alapú SPA (Single Page Application) állásjelentkezések nyomon követéséhez. Angular Material UI, JWT alapú hitelesítés, reszponzív design.
 
 ## Technológiai stack
 
