@@ -87,9 +87,6 @@ deleteApplication(id: number): void {
   });
 }
 
-  getStatusLabel(status: ApplicationStatus): string {
-    return status;
-  }
 
   patchStatus(id: number, newStatus: ApplicationStatus): void {
     const app = this.applications.find(a => a.id === id);

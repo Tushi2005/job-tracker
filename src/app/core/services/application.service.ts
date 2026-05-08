@@ -38,6 +38,12 @@ export class ApplicationService{
     }
 
     patch(id: number, data: Partial<Application>) {
-        return this.http.patch<Application>(`${this.apiUrl}/${id}`, data);
+        // JsonPatchDocument formátum (RFC 6902) amit a backend vár
+        const patchDoc = Object.entries(data).map(([key, value]) => ({
+            op: 'replace',
+            path: `/${key}`,
+            value
+        }));
+        return this.http.patch<Application>(`${this.apiUrl}/${id}`, patchDoc);
     }
 }
