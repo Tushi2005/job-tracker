@@ -36,6 +36,14 @@
           Bejelentkezés
         </button>
       </form>
+
+      <div class="divider">vagy</div>
+
+      <button mat-stroked-button class="google-btn" type="button" (click)="onGoogleLogin()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="20">
+        Bejelentkezés Google-lel
+      </button>
+
     </mat-card-content>
     <mat-card-actions>
       <a routerLink="/register">Még nincs fiókod? Regisztrálj!</a>

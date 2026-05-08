@@ -36,6 +36,10 @@ export class Login {
 
   constructor(private authService: AuthService, private router: Router){}
 
+  onGoogleLogin(): void {
+    this.authService.loginWithGoogle();
+  }
+
   onSubmit(): void{
     if(this.loginForm.invalid){
       this.errorMessage = "Kérlek töltsd ki helyesen az űrlapot!";
@@ -45,10 +49,9 @@ export class Login {
     const {email, password} = this.loginForm.value;
 
     this.authService.login({email: email!, password: password!}).subscribe({
-      next: (response) => {
-        this.authService.saveToken(response.token, response.fullName);
+      next: (userInfo) => {
+        this.authService.saveUser(userInfo);
         this.errorMessage = null;
-        this.router.navigate(['applications'])
       },
       error: (err) => {
         console.error('Login error', err)
