@@ -31,6 +31,10 @@ mat-card {
   font-size: 0.85rem;
 }
 
+.submit-btn {
+  width: 100%;
+}
+
 .google-btn {
   width: 100%;
   display: flex;
