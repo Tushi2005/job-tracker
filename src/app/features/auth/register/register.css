@@ -26,6 +26,10 @@ mat-card-footer{
   font-weight: 500;
 }
 
+.submit-btn {
+  width: 100%;
+}
+
 @media (max-width: 480px) {
   .login-container,
   .register-container {

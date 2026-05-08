@@ -24,6 +24,25 @@ mat-card {
   box-sizing: border-box;
 }
 
+.divider {
+  text-align: center;
+  margin: 1rem 0;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 @media (max-width: 480px) {
   .login-container,
   .register-container {

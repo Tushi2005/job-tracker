@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
+import { OAuthCallback } from './features/auth/oauth-callback/oauth-callback';
 import { ApplicationsList } from './features/applications/applications-list/applications-list';
 import { authGuard } from './core/guards/auth-guard';
 import { ApplicationForm } from './features/applications/application-form/application-form';
@@ -8,6 +9,7 @@ import { ApplicationForm } from './features/applications/application-form/applic
 export const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'register', component: Register },
+  { path: 'auth/callback', component: OAuthCallback },
   { path: 'applications', component: ApplicationsList, canActivate: [authGuard] },
   { path: 'applications/new', component: ApplicationForm, canActivate: [authGuard] },
   { path: 'applications/:id/edit', component: ApplicationForm, canActivate: [authGuard] },

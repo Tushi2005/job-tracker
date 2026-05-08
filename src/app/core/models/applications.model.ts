@@ -21,7 +21,6 @@ export enum ApplicationStatus {
   NoResponse = 'NoResponse'
 }
 
-
 export const STATUS_OPTIONS = [
   { value: ApplicationStatus.Sent, label: 'Elküldve' },
   { value: ApplicationStatus.InterviewScheduled, label: 'Interjú' },

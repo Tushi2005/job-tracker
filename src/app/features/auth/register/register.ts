@@ -33,6 +33,10 @@ export class Register {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  onGoogleLogin(): void {
+    this.authService.loginWithGoogle();
+  }
+
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.errorMessage = 'Kérlek töltsd ki helyesen a regisztrációs űrlapot.';
@@ -43,10 +47,9 @@ export class Register {
 
     this.authService.register({ fullName: fullName!, email: email!, password: password! })
       .subscribe({
-        next: (response) => {
-          this.authService.saveToken(response.token, response.fullName);
+        next: (userInfo) => {
+          this.authService.saveUser(userInfo);
           this.errorMessage = null;
-          this.router.navigate(['/applications']);
         },
         error: (err) => {
           console.error('Register error', err);
