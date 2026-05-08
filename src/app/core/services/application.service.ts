@@ -38,7 +38,6 @@ export class ApplicationService{
     }
 
     patch(id: number, data: Partial<Application>) {
-        // JsonPatchDocument formátum (RFC 6902) amit a backend vár
         const patchDoc = Object.entries(data).map(([key, value]) => ({
             op: 'replace',
             path: `/${key}`,
