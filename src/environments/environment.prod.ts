@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://backend.jobtracker.adamcloud.hu'
+  apiUrl: 'https://jobtracker-api.adamcloud.hu'
 };
